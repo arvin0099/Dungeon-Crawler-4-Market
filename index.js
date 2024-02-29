@@ -1,7 +1,7 @@
 const exp = require('constants')
 const express = require('express')
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 const methodOverride = require('method-override')
 
 app.use(express.static('public'))
@@ -11,7 +11,7 @@ app.use(methodOverride('_method'))
 
 app.get('/home', (req, res) => {
     res.render('index.ejs', {
-        
+
     })
 })
 
