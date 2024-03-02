@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="bg-gray-800 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex">
+                <a href="/home" class="text-white py-2 px-4 hover:bg-gray-700 rounded">Home</a>
+                <a href="/market" class="text-white py-2 px-4 hover:bg-gray-700 rounded">Market Place</a>
+                <a href="/account" class="text-white py-2 px-4 hover:bg-gray-700 rounded">Account Settings</a>
+            </div>
+            <div>
+                    <a href="/login" class="text-white py-2 px-4 hover:bg-gray-700 rounded">Log Out</a>
+            </div>
+    </nav>
+    </div>
+    <div class="bg-slate-300 mx-auto px-4 py-8 flex justify-start">
+        <div class="p-4 flex flex-col mr-4 w-30">
+            <a href="#" class="border-blue-400 border-b mb-2 pb-2 hover:text-red-700">Weapon</a>
+            <a href="#" class="border-blue-400 border-b mb-2 pb-2 hover:text-red-700">Armor</a>
+        </div>
+        <div class="shadow-inner p-3 border-5 bg flex flex-col max-h-[85vh] overflow-y-auto">
+            <div class="grid gap-1 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+                <% for (let i=0; i < items.length; i++) { %>
+                    <div class="shadow border-2 bg-white">
+                            <div class="flex">
+                                <a href="#" class="font-bold ml-5 mt-1 hover:text-red-700"><%=items[i].name%></a>
+                            </div>
+                        <div>
+                            <img src="<%= items[i].img %>" class="m-4 size-44"">
+                        </div>
+                        <div class="flex justify-start items-center m-4">
+                            <button class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded" type="button">Buy</button>
+                            <div class="ml-3 text-lg font-medium">
+                                G: <%= items[i].price %>
+                            </div>
+                        </div>
+                    </div>
+                <%}%>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
