@@ -20,7 +20,7 @@ module.exports = [
       name: "Sword3",
       class: "Weapon",
       img: "http://img.pokemondb.net/artwork/bulbasaur.jpg",
-      price: 100,
+      price: 100000,
       power: 200,
     },
     {

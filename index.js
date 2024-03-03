@@ -21,6 +21,19 @@ app.get('/market', (req, res) => {
         items: items
     })
 })
+
+app.get('/account', (req, res) => {
+    res.render('account.ejs', {
+
+    })
+})
+
+app.get('/delete', (req, res) => {
+    res.render('deleteacc.ejs', {
+
+    })
+})
+
 app.listen(port, () => {
     console.log('Server Running')
 })
