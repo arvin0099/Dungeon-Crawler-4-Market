@@ -1,24 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account</title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
+<%- include ('./partials/head.ejs')%>
 <body>
-    <nav class="bg-gray-800 text-white p-4">
-        <div class="flex mx-auto justify-between items-center">
-            <div class="flex">
-                <a href="/home" class="text-white py-2 px-4 hover:bg-gray-700 rounded">Home</a>
-                <a href="/market" class="text-white py-2 px-4 hover:bg-gray-700 rounded">Market Place</a>
-                <a href="/account" class="text-white py-2 px-4 hover:bg-gray-700 rounded">Account Settings</a>
-            </div>
-            <div>
-                    <a href="/login" class="text-white py-2 px-4 hover:bg-gray-700 rounded">Log Out</a>
-            </div>
-        </div>
-    </nav>
+<%- include ('./partials/header.ejs')%>
     <div class="flex flex-col md:flex-row">
         <div class="flex flex-col w-full md:w-1/2 px-4 py-8 border-b-4 md:border-r-4 md:border-b-0 ">
             <div class="">
@@ -39,8 +23,8 @@
                 </div>
             </div>
             <form action="/delete">
-                <div class="flex justify-end pr-7">
-                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-4 rounded">Delete  
+                <div class="flex flex-col justify-end px-4">Delete your account.
+                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-4 rounded size-8 w-28">Delete  
                     </button>
                 </div>
             </form>
