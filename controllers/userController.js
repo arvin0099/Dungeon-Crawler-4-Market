@@ -25,10 +25,19 @@ const getAccountPage = async (req, res) => {
     }
 }
 
+const deletePage = async (req, res) => {
+    try {
+        res.render('deleteacc.ejs')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
     // getMarketItems,
     getHomePage,
-    getAccountPage
+    getAccountPage,
+    deletePage
 }
 
 // router.get('/market', async (req, res) => {

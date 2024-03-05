@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include ('./partials/head.ejs')%>
+<body>
+    <%- include ('./partials/header.ejs')%>
+    <div class="bg-slate-400 mx-auto px-4 py-8 flex justify-start max-h-[100vh]">
+                <div class="grid gap-2 grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+                    <% for (let i=0; i < items.length; i++) { %>
+                        <div class="shadow border-2 rounded-xl bg-white">
+                            <div class="flex">
+                                    <a href="/items/edit/<%= items[i]._id %>" class="font-bold ml-5 mt-1 hover:text-red-700 size-64 max-h-[2rem]"><%=items[i].name%></a>
+                            </div>
+                        </div>
+                    <%}%>               
+    </div>
+</body>
+</html>

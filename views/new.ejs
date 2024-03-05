@@ -9,19 +9,19 @@
                 <form action="/create-new" method="POST">
                     <div class="mb-6">
                         <div class="flex flex-row items-center gap-3 p-3">
-                            <label for="itemName" class=" text-gray-700 text-sm font-bold mb-2">Item Name:</label>
+                            <label for="itemName" class=" text-gray-700 text-sm font-bold mb-2">Item Name :</label>
                             <input type="text" name="name" id="itemName" placeholder="Item Name" class="shadow appearance-none border-2 rounded w-6/12 py-2 px-3 text-gray-700"/>
                         </div>
                         <div class="flex flex-row items-center gap-3 p-3">
-                            <label for="itemClass" class="block text-gray-700 text-sm font-bold mb-2">Item Class:</label>
+                            <label for="itemClass" class="block text-gray-700 text-sm font-bold mb-2">Item Class :</label>
                             <select name="class" id="itemClass" class="shadow border-2 rounded w-6/12 py-2 px-3 text-gray-700 mb-3">
-                                <option value="">Select a Class</option>
+                                <option value="" disabled selected>Select a Class</option>
                                 <option value="Weapon">Weapon</option>
                                 <option value="Armor">Armor</option>
                             </select>
                         </div>
                         <div class="flex flex-row items-center gap-3 p-3">
-                            <label for="imgUrl" class=" text-gray-700 text-sm font-bold mb-2">Image Url:</label>
+                            <label for="imgUrl" class=" text-gray-700 text-sm font-bold mb-2">Image Url :</label>
                             <input type="text" name="img" id="imgUrl" placeholder="Image Url" class="shadow appearance-none border-2 rounded w-6/12 py-2 px-3 text-gray-700 "/>
                         </div>
                         <div class="flex flex-row items-center gap-3 p-3">
@@ -29,8 +29,8 @@
                             <input type="number" name="price" id="price" placeholder="Price" class="shadow appearance-none border-2 rounded w-6/12 py-2 px-3 text-gray-700 "/>
                         </div>
                         <div class="flex flex-row items-center gap-3 p-3">
-                            <label for="power" class=" text-gray-700 text-sm font-bold mb-2">Power:</label>
-                            <input type="text" name="power" id="power" placeholder="Power" class="shadow appearance-none border-2 rounded w-6/12 py-2 px-3 text-gray-700 "/>
+                            <label for="power" class=" text-gray-700 text-sm font-bold mb-2">Power :</label>
+                            <input type="number" name="power" id="power" placeholder="Power" class="shadow appearance-none border-2 rounded w-6/12 py-2 px-3 text-gray-700 "/>
                         </div>
                         <div class="flex">
                             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
@@ -40,6 +40,7 @@
                     </div>
                 </form>
             </div>
+           
     </div>
 </body>
 </html>

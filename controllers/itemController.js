@@ -19,8 +19,35 @@ const createMarketItems = async (req, res) => {
 
 const createItem = async (req, res) => {
     try {
-        const items = await Items.create(req.body)
+        await Items.create(req.body)
         res.redirect('/create-item')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const editItem = async (req, res) => {
+    try {
+        const items = await Items.findById(req.params.itemId)
+        res.render('edit.ejs', {items})
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const editItemList = async (req, res) => {
+    try {
+        const items = await Items.find({})
+        res.render('itemList.ejs', {items})
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const editItemfin = async (req, res) => {
+    try {
+        await Items.findByIdAndUpdate(req.params.itemId, req.body)
+        res.redirect('/item-list')
     } catch (error) {
         console.log(error)
     }
@@ -29,5 +56,8 @@ const createItem = async (req, res) => {
 module.exports = {
     getMarketItems,
     createMarketItems,
-    createItem
+    createItem,
+    editItem,
+    editItemList,
+    editItemfin
 }
