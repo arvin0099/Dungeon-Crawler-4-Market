@@ -1,6 +1,6 @@
 const router = require("express").Router()
 const itemsController = require('../controllers/userController')
 
-router.get('/home', itemsController.getHomePage)
+router.get('/', itemsController.getHomePage)
 
 module.exports = router
