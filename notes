@@ -1,0 +1,26 @@
+// const testItem = {
+//     id: "001",
+//     name: "Sword",
+//     class: "Weapon",
+//     img: "http://img.pokemondb.net/artwork/bulbasaur.jpg",
+//     price: 100,
+//     power: 200
+// }
+
+// const createItem = async (tItem) => {
+//     try {
+//         const items = await Items.create(tItem)
+//     } catch (error) {
+//         console.log(error)
+//     } finally {
+
+//     }
+// }
+
+// createItem(testItem)
+
+// app.get('/home', (req, res) => {
+//     res.render('index.ejs', {
+
+//     })
+// })
