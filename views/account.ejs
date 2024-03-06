@@ -6,47 +6,55 @@
     <!-- used chatgpt for css documentation instead of searching the website on the things i need -->
     <div class="flex flex-col md:flex-row">
         <div class="flex flex-col w-full md:w-1/2 px-4 py-8 border-b-4 md:border-r-4 md:border-b-0 ">
-            <div class="">
-                <div class="p-4 size-40 h-11 font-extrabold text-lg">Account Username </div>
-                <div class="mt-4 p-4 rounded-lg size-80 h-56">
-                    <form action="/fruits" method="POST" class="">
-                        <div class="mb-6">
-                            <input type="password" name="newPassword" id="newPassword" placeholder="New Password" class="shadow appearance-none border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight"/>
-                            <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" class="shadow appearance-none border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight"/>
-                            <input type="password" name="oldPassword" id="oldPassword" placeholder="Old Password" class="shadow appearance-none border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight"/>
+            <% if (currentUser) {%>
+             <div class="">
+                    <div class="p-4 size-40 h-11 font-extrabold text-lg">Account Username </div>
+                    <div class="mt-4 p-4 rounded-lg size-80 h-56">
+                        <form action="/fruits" method="POST" class="">
+                            <div class="mb-6">
+                                <input type="password" name="newPassword" id="newPassword" placeholder="New Password" class="shadow appearance-none border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight"/>
+                                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" class="shadow appearance-none border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight"/>
+                                <input type="password" name="oldPassword" id="oldPassword" placeholder="Old Password" class="shadow appearance-none border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight"/>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
+                                    Change Password
+                                </button>
+                            </div>
+                        </form>
                         </div>
-                        <div class="flex items-center justify-between">
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
-                                Change Password
+                    </div>
+                    <form action="/delete">
+                        <div class="flex flex-col justify-end px-4">Delete your account.
+                            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-4 rounded size-8 w-28">Delete  
                             </button>
                         </div>
                     </form>
-                </div>
-            </div>
-            <form action="/delete">
-                <div class="flex flex-col justify-end px-4">Delete your account.
-                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-4 rounded size-8 w-28">Delete  
-                    </button>
-                </div>
-            </form>
+            <% } else { %>
+                <a  href="/">Not logged in - Click me to log in</a>
+            <% } %>
         </div>
         <div class="flex flex-col w-full md:w-1/2 px-4 py-8 ">
             <!-- Make the (Super User) a dynamic thing depending on the User -->
-            <div class="text-3xl font-bold text-gray-800 mb-4">Username Status (Super User)</div>
-            <div class="text-2xl font-bold">Gold </div>
-            <div class="text-xl font-bold pt-4">Tools
-                <ul class="pt-2">
-                    <li>
-                        <a href="/create-item" class="font-sans text-blue-600 hover:text-blue-900">Create items</a>
-                    </li>
-                    <li>
-                        <a href="/item-list" class="font-sans text-blue-600 hover:text-blue-900">Edit/Delete items</a>
-                    </li>
-                    <!-- <li>
-                        <a href="#" class="font-sans text-blue-600 hover:text-blue-900">Delete items</a>
-                    </li> -->
-                </ul>
-            </div>
+            <% if (currentUser) {%>
+                <% if (currentUser.superUser === true) { %>
+                    <div class="text-3xl font-bold text-gray-800 mb-4">Username Status (Super User)</div>
+                    <div class="text-xl font-bold pt-4">Tools
+                        <ul class="pt-2">
+                            <li>
+                                <a href="/create-item" class="font-sans text-blue-600 hover:text-blue-900">Create items</a>
+                            </li>
+                            <li>
+                                <a href="/item-list" class="font-sans text-blue-600 hover:text-blue-900">Edit/Delete items</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <% } else { %>
+                        <div class="text-3xl font-bold text-gray-800 mb-4">Normal User</div>
+                        <% } %>
+            <% } else { %>
+                <a  href="/">Not logged in - Click me to log in</a>
+            <% } %>
         </div>
     </div>
 

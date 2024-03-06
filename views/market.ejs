@@ -4,10 +4,10 @@
 <body>
     <%- include ('./partials/header.ejs')%>
     <div class="bg-slate-400 mx-auto px-4 py-8 flex justify-start max-h-[100vh]">
-            <div class="p-4 flex flex-col mr-4 w-30">
+            <!-- <div class="p-4 flex flex-col mr-4 w-30">
                 <a href="#" class="border-blue-400 border-b mb-2 pb-2 hover:text-red-700">Weapon</a>
                 <a href="#" class="border-blue-400 border-b mb-2 pb-2 hover:text-red-700">Armor</a>
-            </div>
+            </div> -->
             <div class="shadow-inner p-3 border-5 bg flex flex-col max-h-[85vh] overflow-y-auto rounded-xl bg-slate-500">
                 <div class="grid gap-2 grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
                     <% for (let i=0; i < items.length; i++) { %>
@@ -21,8 +21,17 @@
                             <div class="flex-row items-center m-4">
                                 <div class=" text-lg font-medium">
                                     Gold: <%= items[i].price %>
-                                </div>
-                                <button class="shadow-md bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded" type="button">Buy</button>
+                                </div>         
+                                 <% if (currentUser) { %>
+                                    <form action="/" method="POST">
+                                        <button class="shadow-md bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded" type="button">Buy</button>
+                                    </form>
+                                <% } else { %>
+                                    <form action="/new">
+                                    <button class="shadow-md bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded" type="button">Log In to buy</button>
+                                    </form>
+                                <% } %>
+                                
                             </div>
                         </div>
                     <%}%>

@@ -3,15 +3,30 @@ const Items = require('../models/items')
 const getMarketItems = async (req, res) => {
     try {
         const items = await Items.find({})
-        res.render('market.ejs', {items})
+        res.render('market.ejs', {
+            items,
+            currentUser: req.session.currentUser
+        })
         } catch (error) {
             console.log('test', error)
         }
 }
 
+const getInventory = async (req, res) => {
+    try {
+        const items = await Items.find({})
+        res.render('inventory.ejs', {
+            items,
+            currentUser: req.session.currentUser
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 const createMarketItems = async (req, res) => {
     try {
-        res.render('new.ejs')
+        res.render('new.ejs', {currentUser: req.session.currentUser})
     } catch (error) {
         console.log('test', error)
     }
@@ -20,7 +35,7 @@ const createMarketItems = async (req, res) => {
 const createItem = async (req, res) => {
     try {
         await Items.create(req.body)
-        res.redirect('/create-item')
+        res.redirect('/create-item', {currentUser: req.session.currentUser})
     } catch (error) {
         console.log(error)
     }
@@ -38,7 +53,9 @@ const editItem = async (req, res) => {
 const editItemList = async (req, res) => {
     try {
         const items = await Items.find({})
-        res.render('itemList.ejs', {items})
+        res.render('itemList.ejs', {
+            items,
+            currentUser: req.session.currentUser})
     } catch (error) {
         console.log(error)
     }
@@ -47,7 +64,7 @@ const editItemList = async (req, res) => {
 const editItemfin = async (req, res) => {
     try {
         await Items.findByIdAndUpdate(req.params.itemId, req.body)
-        res.redirect('/item-list')
+        res.redirect('/item-list', {currentUser: req.session.currentUser})
     } catch (error) {
         console.log(error)
     }
@@ -56,7 +73,7 @@ const editItemfin = async (req, res) => {
 const deleteItem = async (req, res) => {
     try {
         await Items.findByIdAndDelete(req.params.itemId)
-        res.redirect('/item-list')
+        res.redirect('/item-list', {currentUser: req.session.currentUser})
     } catch (error) {
         console.log(error)
     }
@@ -69,5 +86,6 @@ module.exports = {
     editItem,
     editItemList,
     editItemfin,
-    deleteItem
+    deleteItem,
+    getInventory
 }

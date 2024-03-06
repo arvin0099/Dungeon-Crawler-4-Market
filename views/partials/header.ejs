@@ -3,11 +3,20 @@
         <div class="flex">
             <a href="/" class="text-white py-2 px-4 hover:bg-gray-700 rounded">Home</a>
             <a href="/market" class="text-white py-2 px-4 hover:bg-gray-700 rounded">Market Place</a>
-            <a href="/inventory" class="text-white py-2 px-4 hover:bg-gray-700 rounded">Inventory</a>
-            <a href="/account" class="text-white py-2 px-4 hover:bg-gray-700 rounded">Account Settings</a>
+            <% if (currentUser) { %>
+                <a href="/inventory" class="text-white py-2 px-4 hover:bg-gray-700 rounded">Inventory</a>
+                <a href="/account" class="text-white py-2 px-4 hover:bg-gray-700 rounded">Account Settings</a>
+            <% } else {} %>
         </div>
-        <div>
-            <a href="/login" class="text-white py-2 px-4 hover:bg-gray-700 rounded">Log Out</a>
+        <div class="flex items-center">
+            <% if (currentUser) { %>
+                <div>Welcome <%= currentUser.username %></div>
+                <form action="/new?_method=DELETE" method="POST">
+                    <button type="submit" class="text-white py-2 px-4 hover:bg-gray-700 rounded">Log Out</button>
+                </form>
+            <% } else { %>
+                <a href="/" class="text-white py-2 px-4 hover:bg-gray-700 rounded">Log In</a>
+            <% } %>
         </div>
     </div>
 </nav>

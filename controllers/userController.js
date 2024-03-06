@@ -1,6 +1,20 @@
+const User = require('../models/User')
+const bcrypt = require('bcrypt')
+
+const newPassword = async (req, res) => {
+    try {
+        req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
+        const newUser = await User.create(req.body)
+        console.log(newUser)
+        res.redirect('/')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 const getHomePage = async (req, res) => {
     try {
-        res.render('index.ejs')
+        res.render('index.ejs', {currentUser: req.session.currentUser})
     } catch (error) {
         console.log('test', error)
     }
@@ -8,7 +22,7 @@ const getHomePage = async (req, res) => {
 
 const getAccountPage = async (req, res) => {
     try {
-        res.render('account.ejs')
+        res.render('account.ejs', {currentUser: req.session.currentUser})
     } catch (error) {
         console.log('test', error)
     }
@@ -16,7 +30,7 @@ const getAccountPage = async (req, res) => {
 
 const deletePage = async (req, res) => {
     try {
-        res.render('deleteacc.ejs')
+        res.render('deleteacc.ejs', {currentUser: req.session.currentUser})
     } catch (error) {
         console.log(error)
     }
@@ -25,6 +39,7 @@ const deletePage = async (req, res) => {
 module.exports = {
     getHomePage,
     getAccountPage,
-    deletePage
+    deletePage,
+    newPassword
 }
 
