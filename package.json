@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
     "dev": "tailwindcss -i ./public/css/input.css -o ./public/css/style.css --watch",
-    "start": "concurrently \"npm run dev\" \"nodemon index.js\""
+    "starts": "concurrently \"npm run dev\" \"nodemon index.js\""
   },
   "keywords": [],
   "author": "",
