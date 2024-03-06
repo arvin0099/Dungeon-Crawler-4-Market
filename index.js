@@ -8,7 +8,7 @@ const mongoose = require('mongoose')
 const mongoURI = process.env.MONGODB_URI
 const db = mongoose.connection
 
-mongoose.connect(mongoURI)
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
 
 db.on('error', console.error.bind(console, 'connection error:'))
 db.once('open', function() {
@@ -24,6 +24,7 @@ const marketRouter = require('./routes/marketRtr')
 const homeRouter = require('./routes/homeRtr')
 const accRouter = require('./routes/accountRtr')
 const itemRouter = require('./routes/itemRtr')
+// added /market here before and had me scratching my head on how to fix it chatGPT wasn't of any help.
 app.use('/', marketRouter)
 app.use('/', homeRouter)
 app.use('/', accRouter)
