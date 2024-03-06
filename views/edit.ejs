@@ -32,6 +32,7 @@
                     <div class="flex justify-end mt-4">
                         <!-- Type="submit" took a while to debug this -->
                         <button class="shadow-md bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded" type="submit">Edit</button>
+                        <button class="shadow-md bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded" type="submit" formaction="/items/delete/<%= items._id %>?_method=DELETE">Delete</button>
                      </div>
             </div>
         </form>

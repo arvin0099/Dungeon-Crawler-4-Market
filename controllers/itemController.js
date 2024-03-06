@@ -53,11 +53,21 @@ const editItemfin = async (req, res) => {
     }
 }
 
+const deleteItem = async (req, res) => {
+    try {
+        await Items.findByIdAndDelete(req.params.itemId)
+        res.redirect('/item-list')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
     getMarketItems,
     createMarketItems,
     createItem,
     editItem,
     editItemList,
-    editItemfin
+    editItemfin,
+    deleteItem
 }

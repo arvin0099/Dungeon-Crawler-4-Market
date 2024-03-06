@@ -11,4 +11,6 @@ router.post('/create-new/', itemsController.createItem)
 
 router.put('/items/edit/:itemId', itemsController.editItemfin)
 
+router.delete('/items/delete/:itemId', itemsController.deleteItem)
+
 module.exports = router
