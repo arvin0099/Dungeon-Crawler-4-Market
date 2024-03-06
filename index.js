@@ -8,7 +8,10 @@ const mongoose = require('mongoose')
 const mongoURI = process.env.MONGODB_URI
 const db = mongoose.connection
 
-mongoose.connect(mongoURI)
+mongoose.connect(mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
 
 db.on('error', console.error.bind(console, 'connection error:'))
 db.once('open', function() {
