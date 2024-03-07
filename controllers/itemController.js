@@ -90,7 +90,9 @@ const buyItem = async (req, res) => {
 
         if (item) {
             if (currentUser.gold >= item.price) {
+                //got this code below
                 const inventoryItem = currentUser.inventory.find((invItem) => invItem.itemName === itemName)
+                //end code
                 if (inventoryItem) {
                     inventoryItem.itemCount += 1
                 } else {

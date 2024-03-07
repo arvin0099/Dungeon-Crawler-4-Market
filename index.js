@@ -12,6 +12,8 @@ const db = mongoose.connection
 
 mongoose.connect(mongoURI)
 
+db.on('connected', () => console.log(`Connceted to MongoDB at ${db.host}:${db.port}`))
+
 db.on('error', console.error.bind(console, 'connection error:'))
 db.once('open', function() {
     console.log('Connected successfully to MongoDB')
