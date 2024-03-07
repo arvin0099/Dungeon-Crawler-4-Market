@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-const port = process.env.PORT || 3001
+const PORT = process.env.PORT || 3001
 const methodOverride = require('method-override')
 const mongoose = require('mongoose')
 const session = require('express-session')
@@ -46,6 +46,6 @@ app.use('/', homeRouter)
 app.use('/', accRouter)
 app.use('/', itemRouter)
 
-app.listen(port, () => {
+app.listen(PORT, () => {
     console.log('Server Running')
 })
