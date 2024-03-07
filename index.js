@@ -8,9 +8,9 @@ const session = require('express-session')
 
 
 const mongoURI = process.env.MONGODB_URI
-const db = mongoose.connection
 
 mongoose.connect(mongoURI)
+const db = mongoose.connection
 
 db.on('connected', () => console.log(`Connceted to MongoDB at ${db.host}:${db.port}`))
 

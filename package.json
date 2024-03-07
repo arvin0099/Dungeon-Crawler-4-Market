@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"npm run dev\" \"node index.js\"",
+    "start": "concurrently \"tailwindcss -i ./public/css/input.css -o ./public/css/style.css --watch\" \"node index.js\"",
     "dev": "tailwindcss -i ./public/css/input.css -o ./public/css/style.css --watch",
     "starts": "concurrently \"npm run dev\" \"nodemon index.js\""
   },

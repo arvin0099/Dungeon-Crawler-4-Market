@@ -1,4 +1,4 @@
-const User = require('../models/User')
+const User = require('../models/user')
 const Items = require('../models/items')
 
 const getMarketItems = async (req, res) => {

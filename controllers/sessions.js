@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt')
-const User = require('../models/User.js')
+const User = require('../models/user.js')
 
 //Sources: Lesson
 const newSession = async (req, res) => {
