@@ -5,7 +5,7 @@
     <%- include ('./partials/header.ejs')%>
     <div class="bg-cyan-800  px-4 py-8 ">
         <form action="/items/edit/<%= items._id %>?_method=PUT" method="POST">
-            <div class="shadow border-2 rounded-xl bg-white p-8 size-11/12 flex-col">
+            <div class="shadow border-2 rounded-xl bg-white p-8 size-11/12 flex-col ">
                     <div class="flex flex-row items-center gap-3 p-3">
                         <label for="itemName" class=" text-gray-700 text-sm font-bold mb-2">Item Name :</label>
                         <input type="text" name="name" id="itemName" placeholder="<%= items.name %>" class="shadow appearance-none border-2 rounded w-6/12 py-2 px-3 text-gray-700"/>
