@@ -3,37 +3,35 @@
 <%- include ('./partials/head.ejs')%>
 <body>
     <%- include ('./partials/header.ejs')%>
-    <div class="bg-slate-400 mx-auto px-4 py-8 flex flex-col justify-start max-h-[100vh]">
-        <div>Welcome <%= currentUser.username %></div>
+    <div class="bg-slate-400 mx-auto px-4 py-8 flex flex-col justify-start min-h-screen">
+        <div class="font-semibold text-3xl">Welcome "<%= currentUser.username %>" to your inventory</div>  
             <div class="shadow-inner p-3 border-5 bg flex flex-col max-h-[85vh] overflow-y-auto rounded-xl bg-slate-500">
-                <div class="grid gap-2 grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-                    <% if (currentUser.inventory.length === 0) {%>
-                            <div class="shadow border-2 rounded-xl bg-white">
-                                <div class="flex justify-center items-center h-40">
-                                    <p class="text-lg font-medium">No items</p>
+              <div class="grid gap-2 grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+                <% if (currentUser.inventory.length === 0) { %>
+                    <div class="shadow border-2 rounded-xl bg-white w-64 h-64">
+                        <div class="flex justify-center items-center h-40">
+                            <p class="text-lg font-medium">No items</p>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <% currentUser.inventory.forEach((inventoryItem) => { %>
+                        <% const item = items.find(item => item.name === inventoryItem.itemName); %>
+                        <% if(item) { %>
+                            <div class="shadow border-2 rounded-xl bg-white flex flex-col p-4">
+                                <a href="#" class="font-bold ml-5 mt-1 hover:text-red-700"><%= inventoryItem.itemName %></a>
+                                <div class="flex flex-col justify-center items-center">
+                                    <img src="<%= item.img %>" class="m-3 size-60 self-center">
+                                    <div class="text-lg font-medium mt-4">
+                                        Count: <%= inventoryItem.itemCount %>
+                                    </div>
                                 </div>
                             </div>
-                        <% } else { %>
-                            <% for (let i=0; i < currentUser.inventory.length; i++) { %>
-                                <div class="shadow border-2 rounded-xl bg-white">
-                                        <div class="flex">
-                                            <a href="#" class="font-bold ml-5 mt-1 hover:text-red-700"><%= currentUser.inventory[i].itemName %></a>
-                                        </div>
-                                    <div class="flex justify-start items-center">
-                                        <% const item = items.find(item => items.name === currentUser.inventory[i].itemName) %>
-                                        <img src="<%= item[i].img %>" class="m-3 size-60"">
-                                    </div>
-                                        <div class="flex-row items-center m-4">
-                                        <div class=" text-lg font-medium">
-                                            Count: <%= currentUser.inventory[i].itemCount %>
-                                        </div>
-                                    </div>
-                                </div>
-                            <% } %>
                         <% } %>
+                    <% }) %>
+                <% } %>
                 </div>
             </div>
-        <div class="ml-8">
+        <div class="m-5">
             Gold: <%= currentUser.gold %>
         </div>
     </div>

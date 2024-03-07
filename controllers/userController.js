@@ -12,6 +12,21 @@ const newPassword = async (req, res) => {
     }
 }
 
+const accSuperUpgrade = async (req, res) => {
+    try {
+        const userId = req.session.currentUser._id
+        const updatedUser = await User.findByIdAndUpdate(userId, 
+            { $set: { superUser: true } },
+            //I didn't know that you need this thing below to get an update immediately
+            { new: true }
+            )
+        req.session.currentUser = updatedUser
+        res.redirect('/account')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 const getHomePage = async (req, res) => {
     try {
         res.render('index.ejs', {currentUser: req.session.currentUser})
@@ -36,10 +51,20 @@ const deletePage = async (req, res) => {
     }
 }
 
+const newAccpage = async (req, res) => {
+    try {
+        res.render('newacc.ejs', {currentUser: req.session.currentUser})
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
     getHomePage,
     getAccountPage,
     deletePage,
-    newPassword
+    newPassword,
+    newAccpage,
+    accSuperUpgrade
 }
 

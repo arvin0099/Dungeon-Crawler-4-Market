@@ -1,3 +1,4 @@
+const User = require('../models/User')
 const Items = require('../models/items')
 
 const getMarketItems = async (req, res) => {
@@ -35,7 +36,7 @@ const createMarketItems = async (req, res) => {
 const createItem = async (req, res) => {
     try {
         await Items.create(req.body)
-        res.redirect('/create-item', {currentUser: req.session.currentUser})
+        res.redirect('/create-item')
     } catch (error) {
         console.log(error)
     }
@@ -44,7 +45,7 @@ const createItem = async (req, res) => {
 const editItem = async (req, res) => {
     try {
         const items = await Items.findById(req.params.itemId)
-        res.render('edit.ejs', {items})
+        res.render('edit.ejs', {items, currentUser: req.session.currentUser})
     } catch (error) {
         console.log(error)
     }
@@ -64,7 +65,7 @@ const editItemList = async (req, res) => {
 const editItemfin = async (req, res) => {
     try {
         await Items.findByIdAndUpdate(req.params.itemId, req.body)
-        res.redirect('/item-list', {currentUser: req.session.currentUser})
+        res.redirect('/item-list')
     } catch (error) {
         console.log(error)
     }
@@ -73,7 +74,39 @@ const editItemfin = async (req, res) => {
 const deleteItem = async (req, res) => {
     try {
         await Items.findByIdAndDelete(req.params.itemId)
-        res.redirect('/item-list', {currentUser: req.session.currentUser})
+        res.redirect('/item-list')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+//this code was so hard for me took some research and chatGPT to debug
+const buyItem = async (req, res) => {
+    try {
+        const itemName = req.body.itemName
+        const currentUserId = req.session.currentUser._id
+        const item = await Items.findOne({ name: itemName })
+        const currentUser = await User.findById(currentUserId)
+
+        if (item) {
+            if (currentUser.gold >= item.price) {
+                const inventoryItem = currentUser.inventory.find((invItem) => invItem.itemName === itemName)
+                if (inventoryItem) {
+                    inventoryItem.itemCount += 1
+                } else {
+                    currentUser.inventory.push({ itemName: itemName, itemCount: 1 })
+                }
+                currentUser.gold -= item.price
+                //Previously I have bugs without the codes below, the code below helped me save to my DB and update as soon as I click buy
+                await currentUser.save()
+                req.session.currentUser = currentUser
+                return res.redirect('/market')
+            } else {
+                console.log('not enough gold')
+            } 
+        } else {
+            console.log('item not found')
+        }
     } catch (error) {
         console.log(error)
     }
@@ -87,5 +120,6 @@ module.exports = {
     editItemList,
     editItemfin,
     deleteItem,
-    getInventory
+    getInventory,
+    buyItem
 }

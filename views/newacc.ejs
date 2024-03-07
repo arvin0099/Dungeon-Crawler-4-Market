@@ -4,10 +4,8 @@
 <body>
 <%- include ('./partials/header.ejs') %>
     <div class="flex flex-col px-10 py-10 justify-start max-w-xl">
-        <% if (currentUser) { %>
-        <div class="p-4 size-96 font-extrabold text-5xl">Welcome <%= currentUser.username %></div>
-        <% } else { %>
-            <form action="/new" method="POST">
+        <div class="p-4 font-extrabold text-5xl">Create New account</div>
+            <form action="/new-account" method="POST">
                 <div class="mb-6">
                     <label for="username" class="block text-gray-700 text-sm font-semibold mb-2">Username</label>
                     <input type="text" name="username" id="username" placeholder="Username" class="shadow appearance-none border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight"/>
@@ -16,16 +14,10 @@
                     <label for="password" class="block text-gray-700 text-sm font-semibold mb-2">Password</label>
                     <input type="password" name="password" id="password" placeholder="Password" class="shadow appearance-none border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight"/>
                 </div>
-                <div class="flex items-center justify-between">
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
-                        Log In
-                    </button>
-                </div>
+                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" type="submit">
+                    Create Account
+                </button>
             </form>
-            <div class="mt-4">
-                <a href="/new-account" class=" bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Create Account</a>
-            </div>
-       <% } %>
     </div>
 </body>
 </html>

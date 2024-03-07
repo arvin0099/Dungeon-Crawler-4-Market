@@ -3,12 +3,8 @@
 <%- include ('./partials/head.ejs')%>
 <body>
     <%- include ('./partials/header.ejs')%>
-    <div class="bg-slate-400 mx-auto px-4 py-8 flex justify-start max-h-[100vh]">
-            <!-- <div class="p-4 flex flex-col mr-4 w-30">
-                <a href="#" class="border-blue-400 border-b mb-2 pb-2 hover:text-red-700">Weapon</a>
-                <a href="#" class="border-blue-400 border-b mb-2 pb-2 hover:text-red-700">Armor</a>
-            </div> -->
-            <div class="shadow-inner p-3 border-5 bg flex flex-col max-h-[85vh] overflow-y-auto rounded-xl bg-slate-500">
+    <div class="bg-slate-400 mx-auto px-4 py-8 flex justify-start min-h-screen">
+            <div class="shadow-inner p-3 border-5 bg flex flex-col max-h-[75vh] overflow-y-auto rounded-xl bg-slate-500">
                 <div class="grid gap-2 grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
                     <% for (let i=0; i < items.length; i++) { %>
                         <div class="shadow border-2 rounded-xl bg-white">
@@ -23,13 +19,18 @@
                                     Gold: <%= items[i].price %>
                                 </div>         
                                  <% if (currentUser) { %>
-                                    <form action="/" method="POST">
-                                        <button class="shadow-md bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded" type="button">Buy</button>
-                                    </form>
+                                    <form action="/market" method="POST">
+                                        <input type="hidden" name="itemName" value="<%= items[i].name %>">
+                                    <% if (currentUser.gold >= items[i].price) { %>
+                                        <button class="shadow-md bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded" type="submit">Buy</button>
+                                        </form>
+                                      <% } else { %>
+                                        <button class="shadow-md bg-gray-500 text-white font-bold py-2 px-4 rounded" type="button" disabled>Not Enough Gold</button>
+                                      <% } %>
                                 <% } else { %>
-                                    <form action="/new">
-                                    <button class="shadow-md bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded" type="button">Log In to buy</button>
-                                    </form>
+                                    <div>
+                                        <a href="/" class="shadow-md bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded">Log in to buy</a>
+                                    </div>
                                 <% } %>
                                 
                             </div>
@@ -37,9 +38,11 @@
                     <%}%>
                 </div>
             </div>
+        <% if (currentUser) { %>    
         <div class="ml-8">
-            Gold: 30000
+            Gold: <%= currentUser.gold %>
         </div>
+        <% } else {} %>
     </div>
 </body>
 </html>

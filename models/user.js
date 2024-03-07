@@ -8,10 +8,13 @@ const userSchema = Schema({
     password: {type: String, required: true},
     gold: {type: Number, default: 3000},
     superUser: {type: Boolean, default: false},
-    inventory: [{
-        itemName: {type: String},
-        itemCount :{type: Number}
-    }]
+    inventory: {
+        type : [{
+            itemName: {type: String},
+            itemCount :{type: Number}
+        }],
+    //    default: [{ itemName: 'Sword', itemCount: 1}] 
+    }
 })
 
 const User = mongoose.model('User', userSchema)
