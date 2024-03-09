@@ -19,13 +19,18 @@
                         <!-- Got helped with this method using chat gpt -->
                         <%const u = user.find(user => user._id.toString() === review[i].poster)%>
                         <% if (review[i].item === itemId) { %>
-                            <% if (currentUser.username === u.username) { %>
-                                <a class="shadow-inner font-extrabold">User :<%= u.username %></a>
-                                <div class="shadow-inner"><%= review[i].text %></div>
-                                <a href="/review/<%=u.id%>/<%=review[i].id%>/<%=items._id%>" class="shadow-inner font-sans hover:bg-red-200 text-sm">edit/delete review</a>
+                            <% if (currentUser) { %>
+                                <% if (currentUser.username === u.username) { %>
+                                    <a class="shadow-inner font-extrabold">User :<%= u.username %></a>
+                                    <div class="shadow-inner"><%= review[i].text %></div>
+                                    <a href="/review/<%=u.id%>/<%=review[i].id%>/<%=items._id%>" class="shadow-inner font-sans hover:bg-red-200 text-sm">edit/delete review</a>
+                                <% } else { %>
+                                    <a class="shadow-inner font-extrabold">User :<%= u.username %></a>
+                                    <div class="shadow-inner"><%= review[i].text %></div>
+                                <% } %>
                             <% } else { %>
-                                <a class="shadow-inner font-extrabold">User :<%= u.username %></a>
-                                <div class="shadow-inner"><%= review[i].text %></div>
+                                    <a class="shadow-inner font-extrabold">User :<%= u.username %></a>
+                                    <div class="shadow-inner"><%= review[i].text %></div>
                             <% } %>
                             <% } %>
                             <% } %>
