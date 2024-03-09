@@ -16,15 +16,19 @@
                 <div class="p-4 size-40 h-11 font-extrabold text-lg">Reviews</div>
                 <div  class="shadow-inner p-3 border-5 flex flex-col size-10/12 max-h-[30vh] overflow-y-auto rounded-xl bg-slate-300">
                     <% for (let i=0; i < review.length; i++) { %>
+                        <!-- Got helped with this method using chat gpt -->
                         <%const u = user.find(user => user._id.toString() === review[i].poster)%>
-                        <% if (currentUser.username === u.username) { %>
-                            <a href="/review/<%=u.id%>/<%=review[i].id%>/<%=items._id%>" class="shadow-inner font-extrabold">User :<%= u.username %></a>
-                            <div class="shadow-inner"><%= review[i].text %></div>
-                        <% } else { %>
-                            <a class="shadow-inner font-extrabold">User :<%= u.username %></a>
-                            <div class="shadow-inner"><%= review[i].text %></div>
-                        <% } %>
-                        <% } %>
+                        <% if (review[i].item === itemId) { %>
+                            <% if (currentUser.username === u.username) { %>
+                                <a class="shadow-inner font-extrabold">User :<%= u.username %></a>
+                                <div class="shadow-inner"><%= review[i].text %></div>
+                                <a href="/review/<%=u.id%>/<%=review[i].id%>/<%=items._id%>" class="shadow-inner font-sans hover:bg-red-200 text-sm">edit/delete review</a>
+                            <% } else { %>
+                                <a class="shadow-inner font-extrabold">User :<%= u.username %></a>
+                                <div class="shadow-inner"><%= review[i].text %></div>
+                            <% } %>
+                            <% } %>
+                            <% } %>
                     </div>
                     <div class="shadow-inner"></div>
                 <form action="/new-post" method="POST">

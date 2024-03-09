@@ -120,7 +120,7 @@ const getItemInfo = async (req, res) => {
         const items = await Items.findById(itemId)
         const review = await Review.find({})
         const user = await User.find({})
-        res.render('iteminfo.ejs', {items, review ,user , currentUser: req.session.currentUser})
+        res.render('iteminfo.ejs', {itemId,items, review ,user , currentUser: req.session.currentUser})
     } catch (error) {
         console.log(error)
     }

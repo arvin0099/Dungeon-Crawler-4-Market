@@ -17,6 +17,7 @@ const accSuperUpgrade = async (req, res) => {
     try {
         const userId = req.session.currentUser._id
         const updatedUser = await User.findByIdAndUpdate(userId, 
+            //got help with chatgpt with this how to set
             { $set: { superUser: true } },
             //I didn't know that you need this thing below to get an update immediately
             { new: true }
@@ -64,8 +65,6 @@ const postReview = async (req, res) => {
     try {
         const itemId = req.body.item;
         await Review.create(req.body)
-        // await currentUser.save()
-        // req.session.currentUser = currentUser
         res.redirect(`/item/${itemId}`)
     } catch (error) {
         console.log(error)
