@@ -2,6 +2,12 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 
+const reviewSchema = Schema({
+    text: String,
+    item: String,
+    poster: String,
+})
+
 //sources for default: internet, was just searching on how to have a default value
 const userSchema = Schema({
     username: {type: String, unique: true, required: true},
@@ -13,10 +19,11 @@ const userSchema = Schema({
             itemName: {type: String},
             itemCount :{type: Number}
         }],
-    //    default: [{ itemName: 'Sword', itemCount: 1}] 
+    review: [reviewSchema],
     }
-})
+}, {timestamps: true})
 
 const User = mongoose.model('User', userSchema)
+const Review = mongoose.model('Review', reviewSchema)
 
-module.exports = User
+module.exports = {User, Review}

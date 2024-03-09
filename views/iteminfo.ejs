@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include ('./partials/head.ejs')%>
+</head>
+<body>
+    <%- include ('./partials/header.ejs') %>
+    <div class="bg-slate-400 mx-auto px-4 py-8 flex justify-start min-h-screen">
+        <div class="shadow-inner p-3 border-5 flex flex-col size-10/12 overflow-y-auto rounded-xl bg-slate-500">
+            <div class="flex flex-col shadow border-2 rounded-xl bg-white size-80 justify-center">
+                    <div class="font-bold text-lg p-3 pl-6"><%=items.name%></div>
+                    <img src="<%= items.img %>" class="size-52 self-center">
+                    <div class="font-bold text-lg p-3 pl-6">Price: <%= items.price %></div>     
+            </div>      
+            <div class="flex flex-col">
+                <div class="p-4 size-40 h-11 font-extrabold text-lg">Reviews</div>
+                <div  class="shadow-inner p-3 border-5 flex flex-col size-10/12 max-h-[30vh] overflow-y-auto rounded-xl bg-slate-300">
+                    <% for (let i=0; i < review.length; i++) { %>
+                        <%const u = user.find(user => user._id.toString() === review[i].poster)%>
+                        <% if (currentUser.username === u.username) { %>
+                            <a href="/review/<%=u.id%>/<%=review[i].id%>/<%=items._id%>" class="shadow-inner font-extrabold">User :<%= u.username %></a>
+                            <div class="shadow-inner"><%= review[i].text %></div>
+                        <% } else { %>
+                            <a class="shadow-inner font-extrabold">User :<%= u.username %></a>
+                            <div class="shadow-inner"><%= review[i].text %></div>
+                        <% } %>
+                        <% } %>
+                    </div>
+                    <div class="shadow-inner"></div>
+                <form action="/new-post" method="POST">
+                    <div class="mb-6"> 
+                        <% if (currentUser) { %>
+                            <div class="flex flex-row py-4">
+                                <!-- asked chat gpt on how to write multiple inputs -->
+                                <input type="hidden" name="poster" value="<%= currentUser._id %>"/>
+                                <input type="hidden" name="item" value="<%= items._id %>"/>
+                                <input type="text" name="text" id="text" placeholder="Type review here" class="shadow appearance-none border-2 rounded w-6/12 py-2 px-3 text-gray-700"/>
+                            </div>
+                                <div class="flex">  
+                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Add Review</button>
+                        <% } else { %>
+                            <div class="flex flex-row py-4"></div>    
+                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Log in to add Review</button>
+                            </div>
+                        <% } %>    
+                            
+                    </div>
+                </form>
+            </div> 
+        </div>
+    </div>
+</body>
+</html>

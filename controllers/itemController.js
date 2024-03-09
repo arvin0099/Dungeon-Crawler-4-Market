@@ -1,4 +1,4 @@
-const User = require('../models/user')
+const {User, Review} = require('../models/user')
 const Items = require('../models/items')
 
 const getMarketItems = async (req, res) => {
@@ -114,6 +114,18 @@ const buyItem = async (req, res) => {
     }
 }
 
+const getItemInfo = async (req, res) => {
+    try {
+        const itemId = req.params.itemId;
+        const items = await Items.findById(itemId)
+        const review = await Review.find({})
+        const user = await User.find({})
+        res.render('iteminfo.ejs', {items, review ,user , currentUser: req.session.currentUser})
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
     getMarketItems,
     createMarketItems,
@@ -123,5 +135,6 @@ module.exports = {
     editItemfin,
     deleteItem,
     getInventory,
-    buyItem
+    buyItem,
+    getItemInfo
 }

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include ('./partials/head.ejs')%>
+</head>
+<body>
+    <%- include ('./partials/header.ejs') %>
+        <%const u = user.find(user => user._id.toString() === userId)%>
+        <%const r = review.find(review => review._id.toString() === revId)%>
+
+        <a  class="shadow-inner font-extrabold">user :<%= u.username %></a>
+        <a  class="shadow-inner font-extrabold">review :<%= r.text %></a>
+        <form action="/rev/edit/<%=r._id%>/<%= itemId %>?_method=PUT" method="POST">
+        <div class="flex flex-row items-center gap-3 p-3">
+            <label class=" text-gray-700 text-sm font-bold mb-2">Review :</label>
+            <input type="text" name="text" id="text" placeholder="<%= r.text %>" class="shadow appearance-none border-2 rounded w-6/12 py-2 px-3 text-gray-700"/>
+        </div>
+        <div class="flex">  
+            <button class="shadow-md bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded" type="submit">Edit Review</button>
+            <button class="shadow-md bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded" type="submit" formaction="/rev/delete/<%=r._id%>/<%= itemId %>?_method=DELETE">Delete Review</button>
+     </div>
+    </form>
+</body>
+</html>
